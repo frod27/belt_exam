@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  Your wish list
+<div class = "container">
+  <div class = "header mb-3">
+    <h1 class = "d-inline-block m-2">Hello, {{user.name}}!</h1>
+    <a href = "/logout"><button class = "btn btn-info float-right d-inline-block m-3">Logout</button></a>
+  </div>
+  {% if messages %}
+    <div class = "card text-white bg-success m-3">
+      <div class = "card-header">Nice!</div>
+      <div class = "card-body">
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class = "container your-items">
+    <h2>Your Wish List</h2>
+    <table class = "table table-striped">
+      <thead>
+        <tr>
+          <th scope = "col">Item</th>
+          <th scope = "col">Added by</th>
+          <th scope = "col">Date Added</th>
+          <th scope = "col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in my_landing %}
+        <tr>
+          <td><a href = "/landing/item/{{item.id}}">{{ item.name }}</a></td>
+          <td>{{ item.creator.name }}</td>
+          <td>{{ item.created_at }}</td>
+          <td><a href = '/remove/{{item.id}}'>Remove from my wishlist</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <div class = "container other-items">
+    <h2>Other Users' Wish List</h2>
+    <table class = "table table-striped">
+      <thead>
+        <tr>
+          <th scope = "col">Item</th>
+          <th scope = "col">Added by</th>
+          <th scope = "col"> Date Added</th>
+          <th scope = "col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in all_landings %}
+        <tr>
+          <td>{{ item.creator.name }}</td>
+          <td><a href = "/landing/item/{{item.id}}">{{ item.item }}</a></td>
+          <td>{{ item.created_at }}</td>
+          <td><a href = "/join/{{item.id}}">Add to my Wishlist</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="/landing/add"><button class = "btn btn-info float-right">Add Item</button></a>
+  </div>
+
+</div>
+</body>

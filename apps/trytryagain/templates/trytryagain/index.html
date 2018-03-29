@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login/Registration</title>
+</head>
+<body>
+<div class = "container">
+  <h1>Login</h1>
+  <div class = "row">
+    <div class = "col-sm border border-dark m-3">
+      <form action = "/register" method = "POST" id = "register">
+        {% csrf_token %}
+        <fieldset>
+          <legend>Register Now!</legend>
+          <div class = "form-group row">
+            <label for="name" class = "col-sm-3 col-form-label">Name:</label>
+            <div class = "col-sm-9">
+              <input type = "text" name = "name" id = "register_name" placeholder="at least 3 letters" class = "form-control">
+            </div>
+          </div>
+
+          <div class = "form-group row">
+            <label for="username" class = "col-sm-3 col-form-label">Username:</label>
+            <div class = "col-sm-9">
+              <input type = "text" name = "username" id = "register_username" placeholder="at least 3 characters" class = "form-control">
+            </div>
+          </div>
+
+          <div class = "form-group row">
+            <label for="password" class = "col-sm-3 col-form-label">Password:</label>
+            <div class = "col-sm-9">
+              <input type = "password" name = "password" id = "register_password" placeholder="at least 8 characters" class = "form-control">
+            </div>
+          </div>
+          <div class = "form-group row">
+            <label for="password_confirm" class = "col-sm-3 col-form-label">Confirm PW:</label>
+            <div class = "col-sm-9">
+              <input type = "password" name = "password_confirm" id = "register_password_confirm" placeholder="Re-enter Password" class = "form-control">
+            </div>
+            <!-- <div class="date_hired">
+              <label for="name" class = "col-sm-3 col-form-label">Date Hired:</label>
+            <div class = "col-sm-9">
+              <input type = "date" name = "name" id = "date_hired" class = "form-control">
+            </div> -->
+          </div>
+            <input type = "submit" value = "Register!" class = "btn btn-primary mb-3 float-right">
+        </fieldset>
+      </form>
+    </div>
+
+    <div class = "col-sm border border-dark m-3">
+      <form action = "/login" method = "POST" id = "login">
+        {% csrf_token %}
+        <fieldset>
+          <legend>Log In!</legend>
+          <div class = "form-group row">
+            <label for="username" class = "col-sm-3 col-form-label">Username:</label>
+            <div class = "col-sm-9">
+              <input type = "text" name = "username" id = "login_username" class = "form-control">
+            </div>
+          </div>
+
+          <div class = "form-group row">
+            <label for="password" class = "col-sm-3 col-form-label">Password:</label>
+            <div class = "col-sm-9">
+              <input type = "password" name = "password" id = "login_password"  class = "form-control">
+            </div>
+          </div>
+            <input type = "submit" value = "Log In!" class = "btn btn-primary mb-3 float-right">
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  {% if messages %}
+  <div class = "card text-white bg-danger m-3">
+    <div class = "card-header">Error!</div>
+      <div class = "card-body">
+      <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+</body>
+</html>
